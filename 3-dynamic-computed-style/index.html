@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dynamic Background Width</title>
+  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    .bar-container {
+      background-color: #e0e0e0;
+      border-radius: 1rem;
+      overflow: hidden;
+      height: 2rem;
+      width: 100%;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background-color: #4a90e2; /* un azul suave que queda bien */
+      transition: width 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <main class="container" id="app">
+    <h1>Adjust the Fill Level</h1>
+
+    <input 
+      type="range" 
+      min="0" 
+      max="4" 
+      step="1" 
+      v-model.number="level"
+    />
+
+    <p>Current level: {{ level }} ({{ fillWidth }})</p>
+
+
+    <div class="bar-container">
+      <div class="bar-fill" :style="{ width: fillWidth, backgroundColor: colorWidth }"></div>
+    </div>
+
+    <div style="margin-top: 1rem">
+      <p v-if="level==0">Estás en el nivel más bajo.</p>
+      <p v-else-if="level==4">Estás en el nivel más alto.</p>
+    </div>
+
+  </main>
+
+  <script>
+    const { createApp, ref, computed } = Vue
+
+    createApp({
+      setup() {
+        const level = ref(0)
+
+        const fillWidth = computed(() => {
+          return `${level.value * 25}%`
+        })
+
+        const colorWidth = computed(() => {
+          return level.value == 4 ? '#f53935' : '#4a90e2'
+        })
+        
+
+        return {
+          level,
+          fillWidth,
+          colorWidth
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+</html>
