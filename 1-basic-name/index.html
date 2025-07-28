@@ -29,9 +29,9 @@
       <h2>Results:</h2>
       <ul>
         <li><strong>Combined text:</strong> {{ fullText }}</li>
-        <li><strong>Text length:</strong> </li>
-        <li><strong>Even length?:</strong> </li>
-        <li><strong>Contains all vowels?:</strong> </li>
+        <li><strong>Text length:</strong> {{textLength}}</li>
+        <li><strong>Even length?:</strong>{{isEven}} </li>
+        <li><strong>Contains all vowels?:</strong>{{allVowels}} </li>
       </ul>
     </section>
   </main>
@@ -45,11 +45,22 @@
         const lastName = ref('')
 
         const fullText = computed(() => `${firstName.value} ${lastName.value}`.trim())
+        const textLength = computed(() => fullText.value.length)
+        const isEven = computed(() => fullText.value.length === 0 ? false : fullText.value.length % 2 === 0)
+        const allVowels = computed(() => {
+          const vowels = 'aeiou'
+          const text = fullText.value.toLowerCase()
+          return [...vowels].every(vowel => text.includes(vowel))
+        })
+
 
         return {
           firstName,
           lastName,
-          fullText
+          fullText,
+          textLength,
+          isEven,
+          allVowels
         }
       },
     }).mount('#app')
