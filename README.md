@@ -24,3 +24,13 @@ Mediante el uso de [computed properties](https://vuejs.org/guide/essentials/comp
   - 'Pedro Murcielago" contiene todas las vocales
   - Hay un método de array perfecto para determinar si, _cada una de las vocales del abacedario_, estan contenidas en otro string
 </details>
+
+# 2-qa-list
+
+Implementa un "Preguntas más frequentes" con buscador. Es el típico buscador que escribes una palabra clave y solo aparecen las pregutnas y respuestes que contienen la palabra clave, o bien en la pregunta, o bien en la respuesta.
+
+1. Debes crear un estado derivado que, dado el término de búsqueda _searchTerm_ (acuérdate de usar searchTerm.value, faqs.value, etc), devuelve solamente aquellos elementos del array que contienen dicho término en la pregunta o en la respuesta (hay un método de array excelente para _filtrar_ esa información)
+2. Substiuye tu estado derviado por el estado original en la directiva v-for
+
+`<details v-for="(faq, index) in miEstadoDerivado" :key="index">`
+

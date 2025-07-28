@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Renfe FAQ Search</title>
+  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <main class="container" id="app">
+    <h1>Renfe Q&A</h1>
+
+    <input type="text" placeholder="Search..." v-model="searchTerm" />
+
+    <section>
+      <details v-for="(faq, index) in faqFiltered" :key="index">
+        <summary>{{ faq.question }}</summary>
+        <p>{{ faq.answer }}</p>
+      </details>
+    </section>
+  </main>
+
+  <script>
+    const { createApp, ref, computed } = Vue
+
+    createApp({
+      setup() {
+        const searchTerm = ref("")
+
+        const faqs = ref([
+          {
+            question: "How can I buy a Renfe train ticket?",
+            answer: "You can buy tickets through the Renfe website, mobile app, at stations, or authorized travel agencies. Online purchases accept credit cards and other online payment methods."
+          },
+          {
+            question: "What is the difference between AVE and AVLO?",
+            answer: "AVE is Renfe's high-speed premium service, offering more comfort and flexibility. AVLO is a low-cost high-speed service with fewer amenities and cheaper fares."
+          },
+          {
+            question: "Can I change or cancel my ticket?",
+            answer: "It depends on the fare type. Flexible tickets can be changed or refunded with no or low cost. Promo fares usually don't allow changes or cancellations."
+          },
+          {
+            question: "Do Renfe trains have Wi-Fi?",
+            answer: "Yes, most AVE trains and some long-distance trains offer free Wi-Fi through the PlayRenfe platform. A registration may be required."
+          },
+          {
+            question: "How much luggage can I take on Renfe trains?",
+            answer: "You are allowed to carry up to three pieces of luggage, with a total weight limit of 25 kg. Special items may require prior authorization."
+          },
+          {
+            question: "Are pets allowed on Renfe trains?",
+            answer: "Yes, small pets are allowed under certain conditions. They must travel in a cage or carrier and require a pet ticket. Guide dogs are always allowed."
+          },
+          {
+            question: "What should I do if I lose something on the train?",
+            answer: "You can contact Renfe's lost and found service through their website or visit the station where you arrived. Include train number and travel details."
+          },
+          {
+            question: "How early should I arrive at the station?",
+            answer: "For AVE and long-distance trains, it's recommended to arrive at least 30 minutes before departure. For commuter trains, 5-10 minutes is usually enough."
+          },
+          {
+            question: "Can I bring my bicycle on the train?",
+            answer: "Yes, bicycles are allowed under certain conditions. They must be folded or packed in a case for AVE and long-distance trains. Regional trains may allow unpacked bikes."
+          },
+          {
+            question: "What discounts are available?",
+            answer: "Renfe offers discounts for children, seniors, large families, youth (Carnet Joven), and regular travelers. Special promos are available throughout the year online."
+          },
+          {
+            question: "Are there food and drinks on board?",
+            answer: "Most AVE and long-distance trains offer a café-bar service or trolley service with snacks and drinks. AVLO does not include onboard food services."
+          }
+        ])
+
+        const faqFiltered = computed(()=> {
+            return faqs.value
+        })
+
+        return {
+          searchTerm,
+          faqFiltered,
+          // filteredFaqs to be implemented
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+</html>
