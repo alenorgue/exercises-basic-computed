@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Computed Properties con Vue 3 + PicoCSS</title>
   <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
-  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
   <main class="container" id="app">
@@ -29,9 +29,9 @@
       <h2>Results:</h2>
       <ul>
         <li><strong>Combined text:</strong> {{ fullText }}</li>
-        <li><strong>Text length:</strong> {{ textLength }}</li>
-        <li><strong>Even length?:</strong> {{ isLengthEven  }}</li>
-        <li><strong>Contains all vowels?:</strong> {{ containsAllVowels }}</li>
+        <li><strong>Text length:</strong> </li>
+        <li><strong>Even length?:</strong> </li>
+        <li><strong>Contains all vowels?:</strong> </li>
       </ul>
     </section>
   </main>
@@ -46,22 +46,10 @@
 
         const fullText = computed(() => `${firstName.value} ${lastName.value}`.trim())
 
-        const textLength = computed(() => fullText.value.length)
-
-        const isLengthEven = computed(() => (textLength.value % 2 === 0 ? 'Yes' : 'No'))
-
-        const containsAllVowels = computed(() => {
-          const text = fullText.value.toLowerCase()
-          return ['a', 'e', 'i', 'o', 'u'].every(v => text.includes(v)) ? 'Yes' : 'No'
-        })
-
         return {
           firstName,
           lastName,
-          fullText,
-          textLength,
-          isLengthEven,
-          containsAllVowels,
+          fullText
         }
       },
     }).mount('#app')
