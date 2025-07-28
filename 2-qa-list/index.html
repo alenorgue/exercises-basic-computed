@@ -16,7 +16,7 @@
         <input type="text" placeholder="Search..." v-model="searchTerm" />
 
         <section>
-            <details v-for="(faq, index) in faqs" :key="index">
+            <details v-for="(faq, index) in filteredFaqs" :key="index">
                 <summary>{{ faq.question }}</summary>
                 <p>{{ faq.answer }}</p>
             </details>
@@ -24,7 +24,7 @@
     </main>
 
     <script>
-        const { createApp, ref } = Vue
+        const { createApp, ref, computed } = Vue
 
         createApp({
             setup() {
@@ -76,11 +76,17 @@
                         answer: "Most AVE and long-distance trains offer a café-bar service or trolley service with snacks and drinks. AVLO does not include onboard food services."
                     }
                 ])
-
+ const filteredFaqs = computed(()=>{
+    return faqs.value.filter(faqs => {
+        return faqs.question.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
+               faqs.answer.toLowerCase().includes(searchTerm.value.toLowerCase())
+    })
+ })
 
                 return {
                     faqs,
                     searchTerm,
+                    filteredFaqs
                 }
             }
         }).mount('#app')

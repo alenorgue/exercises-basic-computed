@@ -19,31 +19,60 @@
       background-color: #4a90e2; 
       transition: width 0.3s ease;
     }
+    .bar-fill.level-4 {
+      background-color: #fa0000;
+    }
   </style>
 </head>
 <body>
   <main class="container" id="app">
     <h1>Adjust the Fill Level</h1>
 
-    <input 
+    <input  v-model.number="fillLevel"
       type="range" 
       min="0" 
       max="4" 
       step="1" 
     />
 
-    <p>Current level: </p>
+    <p>Current level: {{fillLevel}} </p>
 
 
     <div class="bar-container">
-      <div class="bar-fill"></div>
+      <div class="bar-fill" :style="barFillStyle" :class="barFillClass"></div>
     </div>
 
-    <div style="margin-top: 1rem">
-      <p>Estás en el nivel más bajo.</p>
-      <p>Estás en el nivel más alto.</p>
+    <div  style="margin-top: 1rem">
+        <p v-if="fillLevel === 0">Estás en el nivel más bajo.</p>
+    <p v-else-if="fillLevel === 4">¡Estás en el nivel más alto!</p>
+    <p v-else>Estás en un nivel intermedio.</p>
     </div>
 
   </main>
+   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp, ref, computed} = Vue
+
+    createApp({
+      setup() {
+        const fillLevel = ref(0)
+
+        const barFillStyle = computed(() => {
+          return {
+            width: `${fillLevel.value * 25}%`
+          };
+        });
+
+        const barFillClass = computed(() => {
+          return `bar-fill level-${fillLevel.value}`;
+        });
+
+        return {
+          fillLevel,
+          barFillStyle,
+          barFillClass
+        };
+        }
+      }).mount('#app') </script>
 </body>
 </html>
