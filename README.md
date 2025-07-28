@@ -2,6 +2,7 @@
 # Ejercicios sobre _computed properties_ o estado derivado
 
 Abre con Live Server cada uno de los ficheros index.html del ejercicio a realizar.
+Adjunto un [vídeo](https://oscarm.tinytake.com/df/1795ab5/thumbnail?type=attachments&version_no=0&file_version_no=0&thumbnail_size=preview) con las funcionalidades deseadas.
 
 ## ¿Algo va mal?
 
